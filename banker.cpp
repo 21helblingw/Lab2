@@ -3,15 +3,19 @@
 #include <vector>
 #include <string>
 
-void getInput(std::vector<int> &available, std::vector<std::vector<int>> &allocation, std::vector<std::vector<int>> &max);
+void getInput(std::vector<int> &available, std::vector<std::vector<int>> &allocation, std::vector<std::vector<int>> &max, char *commandInput[]);
 void printTable(std::vector<int>, std::vector<std::vector<int>>, std::vector<std::vector<int>>, std::vector<std::vector<int>>);
 void printVector(std::vector<int> vec);
 std::vector<std::vector<int>> calculateNeed(std::vector<std::vector<int>>,std::vector<std::vector<int>>);
-int main(){
+int main(int args, char *commandInput[]){
     std::vector<int> available;
     std::vector<std::vector<int>> allocation;
     std::vector<std::vector<int>> max;
-    getInput(available,allocation,max);
+    if(args != 2){
+        std::cout<<"ERROR: Invalid Arguments" <<std::endl;
+        exit(1);
+    }
+    getInput(available,allocation,max, commandInput);
     std::vector<std::vector<int>> need = calculateNeed(allocation, max);
     printTable(available, allocation, max, need);
 
@@ -49,8 +53,8 @@ int main(){
 
 
 }
-void getInput(std::vector<int> &available, std::vector<std::vector<int>> &allocation, std::vector<std::vector<int>> &max){
-    std::ifstream file("input.txt");
+void getInput(std::vector<int> &available, std::vector<std::vector<int>> &allocation, std::vector<std::vector<int>> &max, char *commandInput[]){
+    std::ifstream file(commandInput[1]);
     if(!file){
       std::cout << "ERROR: opening file" << std::endl;
       exit(1);  
