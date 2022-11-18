@@ -16,23 +16,26 @@ sudo apt install build-essential
 
 ## Usage
 ```bash
-g++ -Wall
-temp
+g++ -Wall banker.cpp -o banker
+./banker <inputFile>
+```
+### Usage Example with input file named input.txt
+```bash
+g++ -Wall banker.cpp -o banker
+./banker input.txt
 ```
 ## Documentation
-### Shared Memory
+### Input File
 temp
-### Process Synchronization 
+### Data
+temp
+### Safely algorithm 
 temp 
-### Critical Sections
-#### Producer
-temp
-#### Consumer	
+### Print Functions
 temp
 ### Issues
 temp
-### Print Statements
-temp
+
 ## Examples
 ### Example 1:
 ```code
