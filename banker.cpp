@@ -3,14 +3,6 @@
 #include <vector>
 #include <string>
 
-/*
-    std::cout<<"need:";
-    printVector(need[i]);
-    std::cout<< "| work: ";
-    printVector(work);
-    std::cout<<std::endl;
-*/
-
 void getInput(std::vector<int> &available, std::vector<std::vector<int>> &allocation, std::vector<std::vector<int>> &max, char *commandInput[]);
 void printTable(std::vector<int>, std::vector<std::vector<int>>, std::vector<std::vector<int>>, std::vector<std::vector<int>>);
 void printVector(std::vector<int> vec);
@@ -27,10 +19,13 @@ int main(int args, char *commandInput[]){
     }
     // gets input from the file and inserts them into the available, allocation, and max vectors
     getInput(available,allocation,max, commandInput);
+    // calculates the need matrix
     std::vector<std::vector<int>> need = calculateNeed(allocation, max);
+    // prints the entire system state
     printTable(available, allocation, max, need);
+    std::cout<<std::endl;
 
-    //saftly algo
+    //Saftly Algorithm 
     int processes = allocation.size(); // gets the number of processes
     std::vector<int> work = available; // sets a vector equal to the available resources
     std::vector<int> order; // vector that holds the safe order of processes
@@ -57,12 +52,12 @@ int main(int args, char *commandInput[]){
     // print if the system is safe and if it is, the order of the process to run to have the safe state
     if(safe){
         std::cout<<"The system is safe"<<std::endl;
-        std::cout<<"THe order of processes for: ";
+        std::cout<<"The order of processes is: ";
         printVector(order);
         std::cout<<"\n";
     }
     else{
-        std::cout<<"THe system is not safe"<<std::endl; 
+        std::cout<<"The system is not safe"<<std::endl; 
     }
 
 

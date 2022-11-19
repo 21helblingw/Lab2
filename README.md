@@ -40,16 +40,83 @@ If the system is in a safe state, it prints that it is in a safe state and print
 ### Print Functions
 There are two print functions that work together to print the state of the system. These include printVector and printTable. printVector prints the entire contents of the given vector, separating each value by a space. printTable uses printVector to help print the entire table. It prints the allocation resources, max resources, and need resources for each process. After that, it prints the available resources.
 ### Issues
-The main drawback to this implamentation is that the input files have to use a specific format in order for the program to read in the data. The format allows for a dynamic amount of processes and resources, but the amount of resrouces for each process must be the same. The order of resources for each process must also be the same. Another issue with the format is that the available resources should only be state once. If it is stated twice, the orginal values will be overwritten by the other values.
+The main drawback to this implamentation is that the input files have to use a specific format in order for the program to read in the data. The format allows for a dynamic amount of processes and resources, but the amount of resrouces for each process must be the same. The order of resources for each process must also be the same. There must also be equal numbers of allocation rows and maximun rows. Another issue with the format is that the available resources should only be state once. If it is stated twice, the orginal values will be overwritten by the other values.
 
 ## Examples
-### Example 1:
+### Example 1: input.txt
+#### Input
 ```code
-example....
+g++ .\banker.cpp -o banker      
+./banker input.txt     
 ```
-### Example 2:
+#### Output   
 ```code
-example......
+Table:
+P0: allocation: 0 1 0  | max: 7 5 3  | need: 7 4 3
+P1: allocation: 2 0 0  | max: 3 2 2  | need: 1 2 2
+P2: allocation: 3 0 2  | max: 9 0 2  | need: 6 0 0
+P3: allocation: 2 1 1  | max: 2 2 2  | need: 0 1 1 
+P4: allocation: 0 0 2  | max: 4 3 3  | need: 4 3 1
+available : 3 3 2
+
+The system is safe
+The order of processes is: 1 3 4 0 2
+```
+### Example 2: test_1.txt
+#### Input
+```code
+g++ .\banker.cpp -o banker      
+./banker test_1.txt
+```
+#### Output
+```code       
+Table:
+P0: allocation: 0 1 0  | max: 7 5 3  | need: 7 4 3
+P1: allocation: 2 0 0  | max: 3 2 2  | need: 1 2 2
+P2: allocation: 3 0 2  | max: 9 0 2  | need: 6 0 0
+P3: allocation: 2 1 1  | max: 2 2 2  | need: 0 1 1
+P4: allocation: 0 0 2  | max: 4 3 3  | need: 4 3 1
+P5: allocation: 0 0 0  | max: 0 0 1  | need: 0 0 1
+available : 0 0 1
+
+The system is not safe
+```
+### Example 3: test_2.txt
+#### Input
+```code
+g++ .\banker.cpp -o banker
+./banker test_2.txt
+```
+#### Output
+```code              
+Table:
+P0: allocation: 0 1 0  | max: 7 5 3  | need: 7 4 3
+P1: allocation: 2 0 0  | max: 7 2 2  | need: 5 2 2
+P2: allocation: 3 0 2  | max: 9 0 2  | need: 6 0 0
+P3: allocation: 2 1 1  | max: 2 2 2  | need: 0 1 1
+P4: allocation: 0 0 2  | max: 4 3 3  | need: 4 3 1
+available : 3 3 2
+
+The system is safe
+The order of processes is: 3 4 1 2 0
+```
+### Example 4: test_3.txt
+#### Input
+```code
+g++ .\banker.cpp -o banker
+./banker test_3.txt
+```
+#### Output
+```code              
+Table:
+P0: allocation: 0 1 0  | max: 7 5 3  | need: 7 4 3
+P1: allocation: 2 0 0  | max: 10 2 2  | need: 8 2 2
+P2: allocation: 3 0 2  | max: 9 0 2  | need: 6 0 0
+P3: allocation: 2 1 1  | max: 2 2 2  | need: 0 1 1
+P4: allocation: 0 0 2  | max: 4 3 3  | need: 4 3 1
+available : 2 3 2
+
+The system is not safe
 ```
 ### Explanation
 temp
