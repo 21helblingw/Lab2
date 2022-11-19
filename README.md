@@ -26,7 +26,7 @@ g++ -Wall banker.cpp -o banker
 ```
 ## Documentation
 ### Input File
-The input file uses flags to determine where the data should go and it uses "_" and ";" to separate the data values. A colon is used to separate the flag from the data values. Every line of code starts with the flag, followed by the data. For example, "1: 1_2_3_4_5;". The 1 is the flag and the data values are 1,2,3,4, and 5. The flags options are 1, 2, or 3. Flag 1 is for the allocation values of a process, flag 2 is for the maximum values of a process, and flag 3 is for the available resources. Another example in more details is:  "2: 1_2_5;". This adds a row in the maximum matrix with the values 1 for resource 1, 2 for resource 2, and 5 for resource 3. The order of this inputs does not matter because it looks for the flag before adding the value to any data structure.
+The input file uses flags to determine where the data should go and it uses "_" and ";" to separate the data values. A colon is used to separate the flag from the data values. Every line of code starts with the flag, followed by the data. For example, "1: 1_2_3_4_5;". The 1 is the flag and the data values are 1,2,3,4, and 5. The flags options are 1, 2, or 3. Flag 1 is for the allocation values of a process, flag 2 is for the maximum values of a process, and flag 3 is for the available resources. Another example in more detail is:  "2: 1_2_5;". This adds a row in the maximum matrix with the values 1 for resource 1, 2 for resource 2, and 5 for resource 3. The order of these inputs does not matter because it looks for the flag before adding the value to any data structure.
 ### Data
 All of the data extracted from the input files are stored in either vectors or 2D vectors. The input file contains the available resources and the allocation and maximum resources for each process. The available resources get inserted into a vector while the allocation and maximum values get inserted into a 2D vector. So the allocation matrix consists of n rows where n is the number of processes and each row is a vector where each value is the allocation value for each resource. The same thing applies to the maximum matrix, but each row is a vector where each value is the maximum value for each resource. The need matrix is calculated by subtracting the allocation matrix from the maximum matrix. This is accomplished with the calcuateNeed function which returns a 2D vector and takes two 2D matrices as parameters. This functions subtracts the allocation value from the maximum value for each element of the matrixes 
 ### Safely algorithm 
@@ -40,7 +40,7 @@ If the system is in a safe state, it prints that it is in a safe state and print
 ### Print Functions
 There are two print functions that work together to print the state of the system. These include printVector and printTable. printVector prints the entire contents of the given vector, separating each value by a space. printTable uses printVector to help print the entire table. It prints the allocation resources, max resources, and need resources for each process. After that, it prints the available resources.
 ### Issues
-The main drawback to this implamentation is that the input files have to use a specific format in order for the program to read in the data. The format allows for a dynamic amount of processes and resources, but the amount of resrouces for each process must be the same. The order of resources for each process must also be the same. There must also be equal numbers of allocation rows and maximun rows. Another issue with the format is that the available resources should only be state once. If it is stated twice, the orginal values will be overwritten by the other values.
+The main drawback to this implementation is that the input files have to use a specific format in order for the program to read in the data. The format allows for a dynamic amount of processes and resources, but the amount of resources for each process must be the same. The order of resources for each process must also be the same. There must also be equal numbers of allocation rows and maximum rows. Another issue with the format is that the available resources should only be stated once. If it is stated twice, the original values will be overwritten by the other values.
 
 ## Examples
 ### Example 1: input.txt
@@ -62,6 +62,8 @@ available : 3 3 2
 The system is safe
 The order of processes is: 1 3 4 0 2
 ```
+#### Explanation
+The first process that can run is process 1. It releases its resources and the new available resources are 5 3 2. Process 3 goes next and the new available resources are 7 4 3. Process 4 can go next and the new available resources are 7 4 5. It goes back to check process 0. Process 0 goes next and the new available resources are 7 5 5. Process 2 can now go and all processes have gone and all resources are available.
 ### Example 2: test_1.txt
 #### Input
 ```code
@@ -81,6 +83,8 @@ available : 0 0 1
 
 The system is not safe
 ```
+#### Explanation
+The first process that can run is process 5. It releases its resources and the new available resources are 0 0 1. None of the other processes can run so the system is not in a safe state
 ### Example 3: test_2.txt
 #### Input
 ```code
@@ -100,6 +104,8 @@ available : 3 3 2
 The system is safe
 The order of processes is: 3 4 1 2 0
 ```
+#### Explanation
+The first process that can run is process 3. It releases its resources and the new available resources are 5 4 3. Process 4 goes next and the new available resources are 5 4 5.  It loops back to check the processes again. Process 1 can go next and the new available resources are 7 4 5. Process 2 goes next and the new available resources are 10 4 7. Process 0 can now go and all processes have gone and all resources are available.
 ### Example 4: test_3.txt
 #### Input
 ```code
@@ -118,5 +124,5 @@ available : 2 3 2
 
 The system is not safe
 ```
-### Explanation
-temp
+#### Explanation
+The first process that can run is process 3. It releases its resources and the new available resources are 4 4 3. Process 4 goes next and the new available resources are 4 4 5. None of the other processes can run with the current available resources so the system is not in a safe state.
