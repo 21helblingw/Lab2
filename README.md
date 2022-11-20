@@ -21,7 +21,7 @@ g++ -Wall banker.cpp -o banker
 ```
 ### Usage Example with input file named input.txt
 ```bash
-g++ -Wall banker.cpp -o banker
+g++ banker.cpp -o banker
 ./banker input.txt
 ```
 ## Documentation
