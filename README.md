@@ -16,7 +16,7 @@ sudo apt install build-essential
 
 ## Usage
 ```bash
-g++ -Wall banker.cpp -o banker
+g++ banker.cpp -o banker
 ./banker <inputFile>
 ```
 ### Usage Example with input file named input.txt
