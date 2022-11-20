@@ -1,7 +1,7 @@
 # lab 2
 ## Program Overview
 The program takes a screenshot of the system and determines if the system is in a safe state. It uses the safety algorithm of the banker's algorithm to determine if the system is in a safe state. If it is in a safe state, it also returns the order in which those processes should run.
-## Installations Needed To Run The Programs
+## Installations Needed To Run The Program
 ### Recommend using Linux Machine to run  
 ### Installing compiling packages
 Need g++ to compile the c++ code
